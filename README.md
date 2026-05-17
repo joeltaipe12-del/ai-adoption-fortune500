@@ -6,7 +6,7 @@ A SQL + Tableau analysis of AI maturity across 1,000 Fortune 500 firms — ident
 
 ---
 
-## TL;DR
+##Exective Summary 
 
 - AI maturity in the Fortune 500 has plateaued at ~54.7 since 2020 despite an 81% adoption rate — **adoption is not advancement**.
 - The market is bifurcating: **Amazon (+69)** and **JPMorgan (+51)** surged in 2024–2025; **Walmart (−27)**, **Google (−22)**, and **Tencent (−29)** regressed.
