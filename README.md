@@ -1,6 +1,6 @@
 # AI Adoption in the Fortune 500 (2020–2025)
 
-A SQL + Tableau analysis of AI maturity across 1,000 Fortune 500 firms — identifying **$1.8T in addressable consulting opportunity** and a market that is bifurcating, not converging.
+A SQL + Tableau analysis of AI maturity across 1,000 Fortune 500 firms — identifying **Consulting opportunity** and a market that is bifurcating, not converging.
 
 **Tech stack:** PostgreSQL · DBeaver · Tableau · Kaggle dataset
 
