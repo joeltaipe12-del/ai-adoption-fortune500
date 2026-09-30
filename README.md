@@ -1,8 +1,10 @@
 # AI Adoption in the Fortune 500 (2020–2025)
 
-A SQL + Tableau analysis of AI maturity across 1,000 Fortune 500 firms — identifying **Consulting opportunity** and a market that is bifurcating, not converging.
+A SQL + Tableau analysis of AI maturity across 1,000 firms (2020–2025) — 20 real, named companies plus synthetic records — identifying **consulting opportunities** and a market that is bifurcating, not converging.
 
 **Tech stack:** PostgreSQL · DBeaver · Tableau · Kaggle dataset
+
+> **About the data:** this project uses a synthetic Kaggle dataset. Only 20 of the companies are real, and all named-company findings are based on those 20. Figures are illustrative, not real-world estimates.
 
 ---
 
@@ -12,7 +14,7 @@ A SQL + Tableau analysis of AI maturity across 1,000 Fortune 500 firms — ident
 - The market is bifurcating: **Amazon (+69)** and **JPMorgan (+51)** surged in 2024–2025; **Walmart (−27)**, **Google (−22)**, and **Tencent (−29)** regressed.
 - Industry × use case drives **8+ ROI points** of variation.
 - Generative AI ROI is rising; Chatbots are losing relevance.
-- Seven Fortune 500 firms — **$1.8T combined revenue** — are below maturity benchmarks.
+- Seven of the 20 real firms — **$1.8T combined revenue** — are below maturity benchmarks.
 - **Walmart leads the target list** ($263B revenue, maturity 10).
 
 ---
@@ -75,7 +77,7 @@ Industry × use case ROI heatmap reveals the 8+ point spread invisible at either
 
 ![Opportunity Targets Dashboard](SQL%20project/Dashboard/Opportunity%20Targets..png)
 
-Quadrant analysis identifies seven verified Fortune 500 firms (combined revenue $1.8T) sitting materially below maturity benchmarks. Walmart anchors the target list at maturity 10 against a sector average of 54.5 — a textbook "high revenue × low maturity" consulting opportunity.
+Quadrant analysis identifies seven of the real firms (combined revenue $1.8T) sitting materially below maturity benchmarks. Walmart anchors the target list at maturity 10 against a sector average of 54.5 — a textbook "high revenue × low maturity" consulting opportunity.
 
 ---
 
@@ -196,7 +198,7 @@ Created a PostgreSQL database and loaded the raw Kaggle CSV (`ai_adoption_tablea
 *File: `01_create_raw_table.sql`*
 
 ### Phase 2 — Data quality & cleaning
-Profiled the raw table for nulls, duplicates, and inconsistencies. Discovered the `company_type` flag distinguishing 20 verified Fortune 500 firms from synthetic placeholder records — a critical methodology insight that drove all downstream filtering.
+Profiled the raw table for nulls, duplicates, and inconsistencies. Discovered the `company_type` flag distinguishing 20 real companies from synthetic placeholder records — a critical methodology insight that drove all downstream filtering.
 *Folders: `01 Data Checks ai_adoption/`, `02 Data Checks ai_adoption/`, `03 Data Clean view/`*
 
 ### Phase 3 — Star schema build
@@ -252,7 +254,7 @@ A composite filter — revenue > $50B, maturity < 78, verified firm, 2025 — id
 
 Several methodology decisions emerged during the analysis. Each is documented because the way they were resolved is itself a transferable skill.
 
-1. **Real vs synthetic companies.** Early queries returned unrecognisable company names. Inspection of the `company_type` field revealed the dataset mixes 20 verified Fortune 500 firms with synthetic placeholder records. *Decision:* filter to `company_type = 'Real'` for all named-company analysis; retain the full panel for industry-level aggregates where statistical robustness matters more than recognisability.
+1. **Real vs synthetic companies.** Early queries returned unrecognisable company names. Inspection of the `company_type` field revealed the dataset mixes 20 real companies with synthetic placeholder records. *Decision:* filter to `company_type = 'Real'` for all named-company analysis; retain the full panel for industry-level aggregates where statistical robustness matters more than recognisability.
 
 2. **Window function aggregation errors.** Initial year-on-year change queries using `LAG()` produced "all fields must aggregate or constant" errors when joined to other measures. *Decision:* wrap the `LAG()` in a CTE to produce a clean derived column, then aggregate downstream. The CTE pattern became the template for all subsequent window-function queries.
 
